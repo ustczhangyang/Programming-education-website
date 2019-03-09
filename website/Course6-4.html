@@ -1,0 +1,329 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Course6-4</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+  <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+  <![endif]-->
+  <script src="assets/js/amazeui.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/jQueryRotate.js"></script>
+
+  <!-- 引入 blockly -->
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+  <script src="myblock/blocks.js"></script>
+	<script src="blockly/msg/js/zh-hans.js"></script>
+</head>
+<body>
+<header class="am-topbar am-topbar-inverse">
+  <h1 class="am-topbar-brand">
+    <a href="HomePage.html" class="am-icon-home am-icon-lg">课程6：小艺术家：变量</a>
+  </h1>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+          data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+          class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+    <div class="am-btn-group am-topbar-center">
+      <a href="Course6-1.html" type="button" class="am-btn am-btn-primary am-round am-active">1</a>
+      <a href="Course6-2.html" type="button" class="am-btn am-btn-primary am-round">2</a>
+      <a href="Course6-3.html" type="button" class="am-btn am-btn-primary am-round">3</a>
+      <a href="Course6-4.html" type="button" class="am-btn am-btn-primary am-round">4</a>
+      <a href="Course6-5.html" type="button" class="am-btn am-btn-primary am-round">5</a>
+      <a href="Course6-6.html" type="button" class="am-btn am-btn-primary am-round">6</a>
+			<a href="Course6-7.html" type="button" class="am-btn am-btn-primary am-round">7</a>
+			<a href="Course6-8.html" type="button" class="am-btn am-btn-primary am-round">8</a>
+    </div>
+    <button class="am-btn am-btn-primary">更多
+      <i class="am-icon-chevron-circle-down"></i>
+    </button>
+    <div class="am-topbar-right">
+      <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+        <button data-am-dropdown-toggle class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle">
+          <i class="am-icon-bars"></i>
+        </button>
+        <ul class="am-dropdown-content">
+          <li><a href="#">注册</a></li>
+          <li><a href="#">随便看看</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<!--在这里编写你的代码-->
+
+<div class="am-g doc-am-g">
+  <div class="am-u-sm-6 am-u-md-4 am-u-lg-4">
+    <div id="pigdiv" style="width:400px; height:400px;background:url(assets/img/course6-4_bg.jpg) no-repeat">
+      <div style="padding-left:140px;padding-top:130px">
+        <img id="monkey" src="assets/img/monkey.jpg" class="am-circle am-img-responsive am-img-xs" alt="monkeyimg">
+      </div>
+    </div>
+    <button type="button" class="am-btn am-btn-primary am-radius am-btn-xl am-fl" onclick="runCode()">
+      <i class="am-icon-play"></i>
+      运行
+    </button>
+    <button type="stepButton" onclick="stepCode()" class="am-btn am-btn-primary am-radius am-btn-xl am-fr">
+      步进
+    </button>
+  </div>
+  <div class="am-u-sm-6 am-u-md-8 am-u-lg-8" style="background-color:LightSteelBlue">
+    <div class="am-container">
+      <img id="monkey2" src="assets/img/monkey.jpg" class="am-circle am-fl">
+      <p class="am-center">让我们再试一次！你能通过设置长度变量为60，来画出这个六边形？</p>
+    </div>
+    <div class="am-g" style="background-color:SteelBlue">
+      <div class="am-u-sm-4 am-u-md-2 am-u-lg-2">
+        模块
+      </div>
+      <div class="am-u-sm-4 am-u-md-6 am-u-lg-4">
+        工作区域1/6模块
+      </div>
+      <div class="am-u-sm-4 am-u-md-4 am-u-lg-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="restart()">
+          <i class="am-icon-refresh"></i>
+          重新开始
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="generateCode()">
+          <i class="am-icon-play-circle"></i>
+          显示代码
+        </button>
+      </div>
+    </div>
+    <!--  blockly工作区<!-->
+    <div id="blocklyDiv" style="height: 400px; width: 880px;"></div>
+  </div>
+</div>
+<xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">
+  <block type="start_block" id="gc/DACBm^shD,1}H#faz" >
+    <next>
+      <block type="setlength" id="5CBzch%F@-.TpEURG9ZH">
+        <next>
+          <block type="controls_repeat_ext" id="-fBt{Vn@P;@q?6${cQsL">
+            <value name="TIMES">
+              <block type="math_number" id="tKvGfCN+(T9@93v,Ri+q">
+                <field name="NUM">6</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="set_colour" id="/z},/HS!M5M-H_wF}-}t">
+                <value name="colour">
+                  <block type="random_colors" id="tZ5M;:iw4pFPI0PK.hL1"></block>
+                </value>
+                <next>
+                  <block type="controls_repeat_ext" id="`B0}70+7wU#W`3!^1Vm^">
+                    <value name="TIMES">
+                      <shadow type="math_number" id="jb%RmoJeV[ML^b*u#NR|">
+                        <field name="NUM">10</field>
+                      </shadow>
+                      <block type="math_number" id="ZQOXJ^13kn^7I`+.Trdr">
+                        <field name="NUM">6</field>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="movepx2" id="?_!D~qdjLQEaPNy:(O{V">
+                        <field name="向前移动">  moveForward</field>
+                        <value name="pixel">
+                          <block type="length" id="$wvlHW]yXc)PwcuwGR;z"></block>
+                        </value>
+                        <next>
+                          <block type="turn2" id="Zuz@Q#pV5[k},IUFghSF">
+                            <field name="direction">turnLeft</field>
+                            <value name="degree">
+                              <block type="math_arithmetic" id="`m@o=;f6|659[X%+r++J">
+                                <field name="OP">DIVIDE</field>
+                                <value name="A">
+                                  <shadow type="math_number" id="3?KOhSo|C6jYs{?omwX:">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                  <block type="math_number" id="Wh1l^4H4y5m^ZNWyf9B#">
+                                    <field name="NUM">360</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <shadow type="math_number" id="U]{VU`Mp28+Ku`y6k%g#">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                  <block type="math_number" id="a(B-mNXK3,:fhB[-51!)">
+                                    <field name="NUM">6</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="turn2" id="3-_EqFf-d0Q0t=meT!Qb">
+                        <field name="direction">turnLeft</field>
+                        <value name="degree">
+                          <block type="math_number" id=".IR=6sB3Pt{O^CiDaOoh">
+                            <field name="NUM">60</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+  <block type="math_number">
+    <field name="NUM">0</field>
+  </block>
+  <block type="length"></block>
+  <block type="colour_picker">
+    <field name="COLOUR">#ff0000</field>
+  </block>
+  <block type="random_colors"></block>
+</xml>
+
+<!--<script type="text/javascript" src="myblock/step-execution.js"></script>-->
+<script type="text/javascript" src="myblock/workspace.js"></script>
+
+<script>
+    var onresize = function (e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 0;
+        var y = 0;
+        do {
+            x += element.offsetLeft;
+            y += element.offsetTop;
+            element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x + 'px';
+        blocklyDiv.style.top = y + 'px';
+        blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+        Blockly.svgResize(workspace);
+    };
+    window.addEventListener('resize', onresize, false);
+    onresize();//调用一次重定位方法
+    Blockly.svgResize(workspace);
+
+    function runCode() {
+        // Generate JavaScript code and run it.
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try {
+            alert(code);
+            eval(code);
+        } catch (e) {
+            alert(e);
+        }
+    }
+	function generateCode() {
+        // Generate JavaScript code and show it.
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try {
+            alert(code);
+        } catch (e) {
+            alert(e);
+        }
+    }
+    function restart() {
+		location.reload();
+    }
+</script>
+<script>
+    //run the code,control the direction and move
+
+    function movepx() {
+        
+    }
+
+    function turn() {
+        
+    }
+	function controls_repeat(){
+		
+	}
+    //判断是否是正确的结果
+    function isRightResult() {
+       
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        var rotate = function () {
+            $("#pig2").rotate({
+                angle: 0,
+                animateTo: 360,
+                duration: 5000,
+                callback: rotate,
+                easing: function (x, t, b, c, d) {
+                    return c * (t / d) + b;
+                },
+                bind: {
+                    click: function () {
+                        $(this).stopRotate();
+                    }
+                }
+            });
+        }
+        rotate();
+
+    });
+</script>
+
+</body>
+</html>

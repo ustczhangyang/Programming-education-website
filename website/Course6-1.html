@@ -1,0 +1,304 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Course6-1</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+  <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+  <![endif]-->
+  <script src="assets/js/amazeui.min.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <!-- 引入 blockly -->
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+  <script src="myblock/blocks.js"></script>
+	<script src="blockly/msg/js/zh-hans.js"></script>
+	<!--定义多层canvas的css信息-->
+	<style>
+	  #canvas-monkey {   
+	    position: absolute;
+	  }
+	
+	  #canvas-path {
+	    position: absolute;
+	  }
+	  #canvas-display {
+	    position: absolute;
+	  }
+	</style>
+</head>
+<body style="background-color:#F0F0F0;">
+<header class="am-topbar am-topbar-inverse">
+  <h1 class="am-topbar-brand">
+    <a href="HomePage.html" class="am-icon-home am-icon-lg">课程6：小艺术家：变量</a>
+  </h1>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+          data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+          class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+			<div class="am-topbar-left"style="border:2px solid;border-radius: 5px;padding-top: 3px;margin-top:3px ;">
+				<a href="Course6-1.html" type="button" class="am-btn am-btn-primary am-round am-active">1</a>
+				<a href="Course6-2.html" type="button" class="am-btn am-btn-primary am-round">2</a>
+				<a href="Course6-3.html" type="button" class="am-btn am-btn-primary am-round">3</a>
+				<a href="Course6-4.html" type="button" class="am-btn am-btn-primary am-round">4</a>
+				<a href="Course6-5.html" type="button" class="am-btn am-btn-primary am-round">5</a>
+				<a href="Course6-6.html" type="button" class="am-btn am-btn-primary am-round">6</a>
+				<a href="Course6-7.html" type="button" class="am-btn am-btn-primary am-round">7</a>
+				<a href="Course6-8.html" type="button" class="am-btn am-btn-primary am-round">8</a>
+			
+				<button class="am-btn am-btn-primary">更多
+					<i class="am-icon-chevron-circle-down"></i>
+				</button>
+		</div>
+    <div class="am-topbar-right">
+      <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+        <button data-am-dropdown-toggle class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle">
+          <i class="am-icon-bars"></i>
+        </button>
+        <ul class="am-dropdown-content">
+          <li><a href="#">注册</a></li>
+          <li><a href="#">随便看看</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<!--在这里编写你的代码-->
+
+<div class="am-g doc-am-g">
+  <div class="am-u-sm-6 am-u-md-4 am-u-lg-4">
+			<div style="background-color: white;">
+				<canvas id="canvas-display" width="400px" height="400px"></canvas>
+				<canvas id="canvas-monkey" width="400px" height="400px"></canvas>
+				<canvas id="canvas-path" width="400px" height="400px"></canvas>
+			</div>
+			<div>
+				<button type="button" class="am-btn am-btn-primary am-radius am-btn-xl am-fl" onclick="runCode()">
+					<i class="am-icon-play"></i>
+					运行
+				</button>
+			</div>
+  </div>
+	
+  <div class="am-u-sm-6 am-u-md-8 am-u-lg-8" style="background-color:LightSteelBlue;">
+    <div class="am-container">
+			<div style="float:left;">
+				<img id="monkey2" src="assets/img/zy_monkey.jpg"style="width: 50px;height: 50px;" class="am-circle am-fl">
+			</div>
+		
+			<!-- <svg width="30" height="30" version="1.1" xmlns="http://www.w3.org/2000/svg"
+			style="position: absolute;float: inherit;">
+			<polygon points="30,30 30,0 0,30" stroke-dasharray="3,3" data-radium="true" style="fill:white;stroke:wihte;stroke-width:1;"/>
+			</svg> -->
+			
+      <div style="width:90%;background-color: white;border:2px solid;border-radius: 15px;border-color:white;
+			float: right;padding-top: 5px;margin-top: 5px;margin-bottom: 5px;">
+				<p>让我们画一个等边三角形。它的每条边都正好一样是100像素。</p>
+			</div>
+			
+		</div>
+    <div class="am-g" style="background-color:SteelBlue">
+      <div class="am-u-sm-4 am-u-md-2 am-u-lg-2">
+        <p>模块</p>
+      </div>
+      <div class="am-u-sm-4 am-u-md-6 am-u-lg-4"style="padding-left: 200px;">
+        <p>工作区域</p>
+      </div>
+      <div class="am-u-sm-4 am-u-md-6 am-u-lg-4">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="restart()">
+          <i class="am-icon-refresh"></i>
+          重新开始
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="generateCode()">
+          <i class="am-icon-play-circle"></i>
+          显示代码
+        </button>
+      </div>
+    </div>
+    <!--  blockly工作区<!-->
+    <div id="blocklyDiv" style="height: 400px; width: 880px;"></div>
+  </div>
+</div>
+<xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">
+  <block type="start_block"></block>
+</xml>
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+  <block type="movepx">
+    <field name="moveDirection">  moveForward</field>
+    <field name="pixelNumber">100</field>
+  </block>
+  <block type="turn">
+    <field name="direction">turnLeft</field>
+    <field name="degree">90</field>
+  </block>
+	<block type="controls_repeat_ext">
+	  <value name="TIMES">
+	    <shadow type="math_number">
+	      <field name="NUM">3</field>
+	    </shadow>
+	  </value>
+	</block>
+</xml>
+
+<!--<script type="text/javascript" src="myblock/step-execution.js"></script>-->
+<script type="text/javascript" src="myblock/workspace.js"></script>
+
+<script>
+
+    function runCode() {
+        // Generate JavaScript code and run it.
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try {
+            alert(code);
+            eval(code);
+        } catch (e) {
+            alert(e);
+        }
+    }
+	function generateCode() {
+        // Generate JavaScript code and show it.
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP =
+            'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try {
+            alert(code);
+        } catch (e) {
+            alert(e);
+        }
+    }
+    function restart() {
+		location.reload();
+    }
+</script>
+
+<script typy="text/javascript">	
+	//run the code,control the direction and move
+	var count = 0;  //用以对块计数判断
+	var direction = 0;   //记录运动的方向
+	var monkeyX = 150-40-5, monkeyY = 243-40-5;   //记录人物的位置用于重画
+	var lineX=150, lineY=243;//记录画线的初始位置
+	var imgMonkey;
+	$(document).ready(function(){				
+		var c=document.getElementById("canvas-display");
+		var ctx = c.getContext('2d');
+		ctx.moveTo(150,243);
+		ctx.lineTo(250,243);
+		ctx.lineTo(200,157);
+		ctx.lineTo(150,243);
+		ctx.lineWidth=5;
+		ctx.strokeStyle="grey";
+		ctx.stroke();
+		var canvasMonkey = document.getElementById('canvas-monkey');
+		var ctxMonkey = canvasMonkey.getContext('2d');
+		imgMonkey = new Image();
+		imgMonkey.src = "assets/img/zy_monkey.jpg";//50*63像素
+		ctxMonkey.drawImage(imgMonkey,150-40,243-40,40,40); 		
+		}); 
+		
+	function movepx(moveDire, pixel) {
+		if (moveDire === "moveBackwards") {
+		    direction = (direction + Math.PI) % (Math.PI * 2);
+		}
+		var ctxPath = document.getElementById('canvas-path').getContext('2d');
+		var ctxMonkey = document.getElementById('canvas-monkey').getContext('2d');		
+		var distinx = lineX + pixel * Math.cos(direction);
+		var distiny = lineY + pixel * Math.sin(direction);
+		monkeyX = distinx;    //调整小人的位置信息
+		monkeyY = distiny - 40;		
+		//在绘制线段前保存现场
+		ctxPath.save();
+		//画线过程，目标点依据弧度制的计算，x = x + step*Math.cos(direction),y= y + step*Math.sin(direction)
+		ctxPath.beginPath();
+		ctxPath.moveTo(lineX, lineY);
+		ctxPath.lineWidth = 5;
+		ctxPath.strokeStyle="blue";
+		ctxPath.lineTo(distinx, distiny);		
+		ctxPath.stroke();
+		ctxPath.restore();		
+		lineX = distinx;
+		lineY = distiny;	
+		//alert(boyx + " " + boyy);
+		//移动小人过程，同时需要进行图片旋转
+		ctxMonkey.clearRect(0, 0, 400, 400);
+		ctxMonkey.save();
+		//alert("boyx:" + boyx + " boyy:" + boyy);
+		ctxMonkey.translate(monkeyX + 20, monkeyY + 20);   //移动到的位置是boyx,boyy
+		//ctxboy.rotate(direction);
+		ctxMonkey.drawImage(imgMonkey, -40 / 2, -40 / 2, 40, 40);
+		ctxMonkey.restore();
+		count = count - 1;
+	}
+
+	function turn(dire_str, angle_str) {
+		var ctxMonkey = document.getElementById('canvas-monkey').getContext('2d');
+		var rad = parseInt(angle_str, 10) * Math.PI / 180;//parseInt(angle_str, 10)返回十进制的整数
+		//alert(parseInt(angle_str, 10));
+		if (dire_str === "turnLeft") {
+		    rad = 2 * Math.PI - rad;   //向左转a即为向右转2*pi-a
+		}		
+		direction = (direction+ rad) % (Math.PI * 2);  //控制旋转和画线的方向,对2*pi取余数
+		//对于人物的图层在旋转前需要保存现在的设置，不然之后的移动部分的函数执行就会出问题
+		ctxMonkey.save();
+		ctxMonkey.clearRect(0, 0, 400, 400);
+		ctxMonkey.translate(monkeyX+ 20, monkeyY+ 20, 40, 40);
+		ctxMonkey.rotate(direction);
+		ctxMonkey.drawImage(imgMonkey,-40 / 2, -40 / 2, 40, 40);
+		ctxMonkey.restore();	
+	}
+	//判断是否是正确的结果
+	function isRightResult() {
+		 
+	}
+	
+</script>
+</body>
+</html>
