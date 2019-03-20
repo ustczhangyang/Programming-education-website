@@ -1,0 +1,516 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Course11-1</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+  <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+  <![endif]-->
+  <script src="assets/js/amazeui.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/jQueryRotate.js"></script>
+
+  <!-- 引入 blockly -->
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/msg/js/zh-hans.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+  <script src="myblock/zrg_blocks.js"></script>
+
+</head>
+<body>
+<header class="am-topbar am-topbar-inverse">
+  <h1 class="am-topbar-brand">
+    <a href="HomePage.html" class="am-icon-home am-icon-lg">课程11：计数循环游戏</a>
+  </h1>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+          data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+          class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+    <div class="am-topbar-left"style="border:2px solid;border-radius: 5px;padding-top: 3px;margin-top:3px ;">
+    		<a href="Course11-1.html" type="button" class="am-btn am-btn-primary am-round am-active">1</a>
+    		<a href="Course11-2.html" type="button" class="am-btn am-btn-primary am-round">2</a>
+    		<a href="Course11-3.html" type="button" class="am-btn am-btn-primary am-round">3</a>
+    		<a href="Course11-4.html" type="button" class="am-btn am-btn-primary am-round">4</a>
+    		<a href="Course11-5.html" type="button" class="am-btn am-btn-primary am-round">5</a>
+    		<a href="Course11-6.html" type="button" class="am-btn am-btn-primary am-round">6</a>
+    		
+    	
+    		<button class="am-btn am-btn-primary">更多
+    			<i class="am-icon-chevron-circle-down"></i>
+    		</button>
+    </div>
+    <div class="am-topbar-right">
+      <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+        <button data-am-dropdown-toggle class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle">
+          <i class="am-icon-bars"></i>
+        </button>
+        <ul class="am-dropdown-content">
+          <li><a href="#">注册</a></li>
+          <li><a href="#">随便看看</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<!--在这里编写你的代码-->
+
+<div class="am-g doc-am-g">
+  <div class="am-u-sm-12 am-u-lg-4">
+    <div id="map" style="width:400px; height:400px;background:url(assets/img/course11-4_bg.jpg) no-repeat;background-size: 100% 100%;  ">
+      <h5 id="success-message-window" class=" am-u-sm-centered" style="color:rgb(68, 204, 250); padding-top:10px;"></h5>
+      <div  class="am-g" style="width:400px;  ;padding-left:20px;">
+        
+          <div id="wukong" style="width:80px; height:80px; background:url(assets/img/course11-6_wukong.png) no-repeat;background-size: 100% 100%; ">
+            
+          </div>
+      </div>
+      
+    </div>
+    <div class="am-g" style="width:430px;">
+      <div class="am-u-sm-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-xl am-fl" onclick="runCode()">
+          <i class="am-icon-play"></i>
+          运行</button>
+      </div>
+      <div class="am-u-sm-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-xl am-fr " onclick="stepCode();">
+          <i class="am-icon-forward"></i>步进</button>
+      </div>
+    </div>
+
+  </div>
+  <div  id="blocklyArea" class="am-u-sm-12 am-u-lg-8 am-u-end" style="background-color:LightSteelBlue">
+    <div class="am-container">
+      <img id="icon1" src="assets/img/pig.jpg" class="am-circle am-fl">
+      <p class="am-center">这是一个未完工的小游戏，通过点击卡通图片来得分，请你完善它</p>
+    </div>
+    <div class="am-g" style="background-color:SteelBlue">
+      <div class="am-u-sm-4 am-u-md-2 am-u-lg-2">
+        模块
+      </div>
+      <div class="am-u-sm-4 am-u-md-6 am-u-lg-4">
+        工作区域1/6模块
+      </div>
+      <div class="am-u-sm-4 am-u-md-4 am-u-lg-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="restart()">
+          <i class="am-icon-refresh"></i>
+          重新开始
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="generateCode()">
+          <i class="am-icon-play-circle"></i>
+          显示代码
+        </button>
+      </div>
+    </div>
+    <!--  blockly工作区<!-->
+    <div id="blocklyDiv" style="height: 400px; "></div>
+  </div>
+</div>
+
+<xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">
+  <variables>
+    <variable type="" id="=lJZg|ya)Xe3$s|S1d=:">i</variable>
+  </variables>
+  <block type="start_block" id="{{k)DkcYU1a5Kp*?[Wnb" x="112" y="30">
+    <next>
+      <block type="controls_for" id="6d}K#V:DU4lxm6sO^.J}">
+        <field name="VAR" id="=lJZg|ya)Xe3$s|S1d=:" variabletype="">i</field>
+        <value name="FROM">
+          <shadow type="math_number" id="=0yBPnyd`#,rZng@y8)P">
+            <field name="NUM">3</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number" id="Xc$sGo$+dUzf,X_7!Z)I">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number" id="w~%`._CtREK_AXPa~(sI">
+            <field name="NUM">-0.5</field>
+          </shadow>
+        </value>
+        <statement name="DO">
+          <block type="zrg_wait" id="pn@X5aO.{a[[l6[|g%nq">
+            <value name="NAME">
+              <block type="variables_get" id="2`Ftge1JHYM!%I26zDJ#">
+                <field name="VAR" id="=lJZg|ya)Xe3$s|S1d=:" variabletype="">i</field>
+              </block>
+            </value>
+            <next>
+              <block type="zrg_disappear" id="3S9T0hq+Sd_zp}~9,5fb">
+                <field name="NAME">appear</field>
+                <value name="NAME">
+                  <block type="text" id="Okug!#F67`}bjkH#!RZ4">
+                    <field name="TEXT">孙悟空</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="zrg_wait" id="@_Td`hf*i|zdY{X#B^O)">
+                    <value name="NAME">
+                      <block type="variables_get" id="LJ*4jwQ];h8S%ym5qY}0">
+                        <field name="VAR" id="=lJZg|ya)Xe3$s|S1d=:" variabletype="">i</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="zrg_disappear" id="aWM@06VAh0ytPfb0W~tk">
+                        <field name="NAME">disappear</field>
+                        <value name="NAME">
+                          <block type="text" id="9^dq$1*k8rSj,eQ{~e.v">
+                            <field name="TEXT">孙悟空</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="zrg_put_someone" id="NN_u929+A-h]An_`QJ6W">
+                            <field name="location">0</field>
+                            <value name="someone">
+                              <block type="text" id="SP|r-q7LP(MwR4Cm7YMv">
+                                <field name="TEXT">孙悟空</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="zrg_message" id="qf}COr?[=k=kd;p*g+?B">
+            <value name="message1">
+              <block type="text" id="`5OycTi(Z)Cfn?#;k,+C">
+                <field name="TEXT">恭喜通关</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="zrg_when_click" id="XB*3UOnw{5WI_E4zgL-." x="112" y="400">
+    <statement name="NAME">
+      <block type="zrg_get_score" id="#y8AcNp,1MP{$zCaVLDo"></block>
+    </statement>
+  </block>
+</xml>
+
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+  <category name="普通块">
+    <block type="controls_for">
+      <field name="VAR" id="OTx$t]e^$o|GKC/-RSU]" variabletype="">i</field>
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">3</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">-0.5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text">
+      <field name="TEXT">孙悟空</field>
+    </block>
+    <block type="zrg_when_click"></block>
+    <block type="zrg_get_score"></block>
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
+  </category>
+  <category name="变量" colour="#A65C81" custom="VARIABLE"></category>
+</xml>
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="success-confirm">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">Amaze UI</div>
+    <div id="success-confirm-message" class="am-modal-bd">
+      祝贺你，完成了关卡！
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>下一关</span>
+    </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="failed-confirm">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">Amaze UI</div>
+    <div class="am-modal-bd">
+      闯关失败，再试试吧！
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>重新开始</span>
+    </div>
+  </div>
+</div>
+<div id="output"></div>
+
+<script type="text/javascript" src="myblock/workspace.js"></script>
+
+
+<script>
+var map = document.getElementById('map');   //地图，用以计算相对位置
+
+var count = 0;  //用以对块计数判断
+
+
+
+function runCode() {
+
+    // Generate JavaScript code and run it.
+    window.LoopTrap = 1000;
+    Blockly.JavaScript.INFINITE_LOOP_TRAP =
+        'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    try {
+        //code = code;
+        alert(code);
+        count = code.split(";").length - 1;
+        eval(code);
+        isRightResult();
+    } catch (e) {
+        alert(e);
+    }
+}
+
+function stepCode(){
+      let x =  getRandLocationX();
+      let y = getRandLocationY();
+      $("#wukong").css("marginTop",y+"px");
+      $("#wukong").css("marginLeft",x+"px");
+}
+
+var sumTimeout = 0;
+var timeoutFlag = 0;
+function myTimeout(delay){
+  delay*=1000;
+  timeoutFlag = 1;
+  sumTimeout += delay;
+  //注：在每个可能被sleep的步骤前面判断flag，并进行相应的setTimeout()
+}
+
+function restart() {
+    location.reload();
+}
+
+//run the code,control the direction and move
+var wukongDistanceX = 0;
+var wukongDistanceY = 0;
+
+var maxDistance = 260;
+var direction = 0;
+
+function actorAppearControl(actorname,dropdown_name){
+  if(actorname == "孙悟空"){
+    actor="#wukong";
+    setTimeout(function(){
+                  if(dropdown_name == 0){
+                    $(actor).css("visibility","hidden");
+                  }
+                  else if (dropdown_name == 1){
+                    $(actor).css("visibility","visible");
+                  }
+                  
+                }
+    ,sumTimeout);
+  }
+}
+
+
+
+function putSomeoneAt(value_someone,dropdown_location){
+  //位置传入值：0,1,2,3,4,5 分别是：随机、左上、右上、左下、右下、中间
+  if(value_someone == "孙悟空"){
+    let someone = "#wukong";
+    setTimeout(function(){
+                  switch(dropdown_location){
+                    case 0:
+                      var x =  getRandLocationX();
+                      var y = getRandLocationY();
+                      $(someone).css("marginTop",y+"px");
+                      $(someone).css("marginLeft",x+"px");
+                      break;
+                    case 1:
+                      $(someone).css("marginTop","0px");
+                      $(someone).css("marginLeft","0px");
+                      break;
+                    case 2:
+                      $(someone).css("marginTop","0px");
+                      $(someone).css("marginLeft",maxDistance+"px");
+                      break;
+                    case 3:
+                      $(someone).css("marginTop",maxDistance+"px");
+                      $(someone).css("marginLeft","0px");
+                      break;
+                    case 4:
+                      $(someone).css("marginTop",maxDistance+"px");
+                      $(someone).css("marginLeft",maxDistance+"px");
+                      break;
+                    case 5:
+                      var x= maxDistance/2;
+                      $(someone).css("marginTop",x+"px");
+                      $(someone).css("marginLeft",x+"px");
+                      break;
+                  }
+                }
+    ,sumTimeout);
+  }
+  
+
+}
+
+
+
+
+function getRandLocationX(){
+  let x = Math.random()*maxDistance*2 - maxDistance;
+  while(x+wukongDistanceX < 0 || x+wukongDistanceX>maxDistance){  //判断坐标是否超出游戏框的边界
+    x = Math.random()*maxDistance*2 - maxDistance;
+  }
+  return x+wukongDistanceX;
+}
+
+function getRandLocationY(){
+  let y = Math.random()*maxDistance*2 - maxDistance;
+  while(y+wukongDistanceY < 0 || y+wukongDistanceY>maxDistance){  //判断坐标是否超出游戏框的边界
+    y = Math.random()*maxDistance*2 - maxDistance;
+  }
+  return y+wukongDistanceY;
+}
+
+
+var score = 0;
+function getScore(){
+  score++;
+}
+function whenClick(message){
+  if(message = "getScore()"){
+    $("#wukong").click(function(){
+      getScore();
+      $('#success-message-window').text('当前得分为：'+score);
+    });
+  }
+}
+
+
+function showMessage(value_message1,statements_message2){
+  setTimeout(function(){
+    $("#wukong").removeAttr("onclick");
+    $("#wukong").css("marginTop","150px");
+    $("#wukong").css("marginLeft","100px");
+    $('#success-message-window').css("width","300");
+        $('#success-message-window').text(value_message1+', '+statements_message2+' 得分为：'+score);
+        
+        if(score>10)setTimeout(function () {  
+        $('#success-confirm').modal({
+                relatedTarget: this,
+                onConfirm: function () {
+                    window.location.replace("Course11-2.html");
+                },
+                onCancel: function () {
+                  clearInterval(interval);
+                }
+            });
+          },2000);
+       }
+    ,sumTimeout);
+}
+
+//判断是否是正确的结果
+function isRightResult() {
+    sumTimeout = 0;
+    //isRightResult作为检查正确的激活
+    // var interval = setInterval(function () {
+    //     if (true) {
+    //         //run success
+    //         $('#success-confirm').modal({
+    //             relatedTarget: this,
+    //             onConfirm: function () {
+    //                 window.location.replace("Course11-2.html");
+    //             },
+    //             onCancel: function () {
+    //               clearInterval(interval);
+    //             }
+    //         });
+    //     } else {
+    //         //run failed
+    //         $('#failed-confirm').modal({
+    //             relatedTarget: this,
+    //             onConfirm: function () {
+    //                 restart();
+    //             },
+    //             onCancel: function () {
+    //               clearInterval(interval);
+    //             }
+    //         });
+    //     }
+    //     count = count - 1;
+        
+    // }, 10000);
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>

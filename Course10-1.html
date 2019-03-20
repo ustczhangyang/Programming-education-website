@@ -1,0 +1,599 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Course10-1</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+  <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+  <![endif]-->
+  <script src="assets/js/amazeui.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/jQueryRotate.js"></script>
+
+  <!-- 引入 blockly -->
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/msg/js/zh-hans.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+  <script src="myblock/blocks.js"></script>
+
+  <script src="assets/js/acorn_interpreter.js"></script>
+  <script src="assets/js/wait_block.js"></script>
+
+
+  <!--定义多层canvas的css信息-->
+  <style>
+    #canvas-boy {
+      z-index: auto;
+      position: absolute;
+    }
+
+    #canvas-path {
+      z-index: auto;
+      position: absolute;
+    }
+
+    #canvas-display {
+      z-index: auto;
+      position: absolute;
+    }
+  </style>
+
+
+</head>
+<body onload="drawInit()">
+<header class="am-topbar am-topbar-inverse">
+  <h1 class="am-topbar-brand">
+    <a href="HomePage.html" class="am-icon-home am-icon-lg">课程10:小艺术家：计数循环</a>
+  </h1>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+          data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+          class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+    <div class="am-btn-group am-topbar-center">
+      <button onclick="window.location.href='Course10-1.html'" type="button" class="am-btn am-btn-primary am-round am-active">1</button>
+      <button onclick="window.location.href='Course10-2.html'" type="button" class="am-btn am-btn-primary am-round">2</button>
+      <button onclick="window.location.href='Course10-3.html'" type="button" class="am-btn am-btn-primary am-round">3</button>
+      <button onclick="window.location.href='Course10-4.html'" type="button" class="am-btn am-btn-primary am-round">4</button>
+      <button onclick="window.location.href='Course10-5.html'" type="button" class="am-btn am-btn-primary am-round">5</button>
+      <button onclick="window.location.href='Course10-6.html'" type="button" class="am-btn am-btn-primary am-round">6</button>
+    </div>
+    <button class="am-btn am-btn-primary">更多
+      <i class="am-icon-chevron-circle-down"></i>
+    </button>
+    <div class="am-topbar-right">
+      <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+        <button data-am-dropdown-toggle class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle">
+          <i class="am-icon-bars"></i>
+        </button>
+        <ul class="am-dropdown-content">
+          <li><a href="#">注册</a></li>
+          <li><a href="#">随便看看</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<!--在这里编写你的代码-->
+
+<div class="am-g doc-am-g">    
+  <div class="am-u-sm-18 am-u-lg-4">
+    <div id="bediv" style="width:400px; height:400px;background:url(pictures/ten/course10-1.jpg) no-repeat">
+
+      <div >
+        <canvas id="canvas-display" width="400px" height="400px"></canvas>
+        <canvas id="canvas-boy" width="400px" height="400px"></canvas>
+        <canvas id="canvas-path" width="400px" height="400px"></canvas>
+
+        
+      </div>
+    </div>
+    <div class="am-g" style="width:430px;">
+      <div class="am-u-sm-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-xl am-fl" onclick="runCode()">
+          <i class="am-icon-play"></i>运行</button>
+      </div>
+      <div class="am-u-sm-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-xl am-fr " onclick="stepCode()">
+          <i class="am-icon-forward"></i>步进</button>
+      </div>
+    </div>
+  </div>
+  <div  id="blocklyArea" class="am-u-sm-12 am-u-lg-8 am-u-end" style="background-color:LightSteelBlue">
+    <div class="am-container">
+      <img id="boy2" src="pictures/ten/boy.jpg" class="am-circle am-fl">
+      <p class="am-center">用一个重复模块来画一个边长50像素的三角形。</p>
+    </div>
+    <div class="am-g" style="background-color:SteelBlue">
+      <div class="am-u-sm-4 am-u-md-2 am-u-lg-2">
+        模块
+      </div>
+      <div class="am-u-sm-4 am-u-md-6 am-u-lg-4">
+        工作区域1/6模块
+      </div>
+      <div class="am-u-sm-4 am-u-md-4 am-u-lg-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="restart()">
+          <i class="am-icon-refresh"></i>
+          重新开始
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="generateCode()">
+          <i class="am-icon-play-circle"></i>
+          显示代码
+        </button>
+      </div>
+    </div>
+    <!--  blockly工作区<!-->
+    <div id="blocklyDiv" style="height: 400px; "></div>
+  </div>
+</div>
+
+
+<xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">
+  <block type="start_block"></block>
+
+
+</xml>
+
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+
+  
+
+  <block type="controls_repeat_ext"></block>
+
+  <block type="math_number">
+        <field name="NUM">123</field>
+  </block>
+  <block type="turn_angle"></block>
+  <block type="move_step"></block>
+
+   <block type="colour_picker" id="0x3lzHcb`paoiC~~oC-s" x="213" y="63">
+    <field name="COLOUR">#ff0000</field>
+  </block>
+   <block type="colour_random" id="t%}l9Ly#tqiZoa:LbZ4-" x="413" y="63"></block>
+
+</xml>
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="success-confirm">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">Amaze UI</div>
+    <div class="am-modal-bd">
+      祝贺你，完成了关卡1！
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>下一关</span>
+    </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="failed-confirm">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">Amaze UI</div>
+    <div class="am-modal-bd">
+      还有一些问题没有解决。
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>重新开始</span>
+    </div>
+  </div>
+</div>
+<div id="output"></div>
+
+<script type="text/javascript" src="myblock/workspace.js"></script>
+<script src="assets/js/acorn_interpreter.js"></script>
+
+<script>
+var count = 0;  //用以对块计数判断
+var direction = 0;   //记录运动的弧度制方向
+var boyx = 135, boyy = 184.4;   //记录人物的位置用于重画
+var movepointx = 175, movepointy = 214.4;
+var imgboy;   //人物的图片
+
+    //对canvas进行初始化配置，本课程需要多个canvas来表示不同的图像，包括原本的地图信息，人物位置信息和运动轨迹信息
+    $(document).ready(function(){
+        var canvasboy = document.getElementById('canvas-boy');
+        var ctxboy = canvasboy.getContext('2d');
+        var ctxdisplay = document.getElementById('canvas-display').getContext('2d');
+        ctxdisplay.beginPath();
+
+        ctxdisplay.moveTo(200,166.5);
+        ctxdisplay.lineTo(175,214.4);
+        ctxdisplay.lineTo(225,214.4);
+        ctxdisplay.lineTo(200,166.5);
+
+
+        ctxdisplay.stroke();
+        //ctxdisplay.stroke(105, 105, 190, 190);
+        imgboy = new Image();
+        imgboy.src = "pictures/ten/boydraw.jpg";
+        imgboy.onload = function () {
+            ctxboy.drawImage(imgboy, boyx, boyy, 40, 40);  //设定小人的大小为40*40像素
+        };
+    });
+
+
+    //对人物的方向和角度进行调整
+    function turnDireAngle(dire_str, angle_str) {
+        alert("turn");
+        var ctxboy = document.getElementById('canvas-boy').getContext('2d');
+        var rad = parseInt(angle_str, 10) * Math.PI / 180;
+        if (dire_str === "left") {
+            rad = 2 * Math.PI - rad;   //向左转a即为向右转2*pi-a
+        }
+
+        direction = (direction + rad) % (Math.PI * 2);  //控制旋转和画线的方向,对2*pi取余数
+
+        //对于人物的图层在旋转前需要保存现在的设置，不然之后的移动部分的函数执行就会出问题
+        ctxboy.save();
+        ctxboy.clearRect(0, 0, 400, 400);
+        ctxboy.translate(boyx + 20, boyy + 20);
+        ctxboy.rotate(direction);
+        ctxboy.drawImage(imgboy, -40 / 2, -40 / 2, 40, 40);
+        ctxboy.restore();
+        count = count - 1;
+    }
+
+    //小人移动的执行函数
+    function moveStep(movedire, step) {
+        //alert("move");
+        if (movedire === "movebackward") {
+            direction = (direction + Math.PI) % (Math.PI * 2);
+        }
+
+        var ctxpath = document.getElementById('canvas-path').getContext('2d');
+        var ctxboy = document.getElementById('canvas-boy').getContext('2d');
+
+        var distinx = movepointx + step * Math.cos(direction);
+        var distiny = movepointy + step * Math.sin(direction);
+        boyx = distinx;    //调整小人的位置信息
+        boyy = distiny - 40;
+
+        //在绘制线段前保存现场
+        ctxpath.save();
+        //画线过程，目标点依据弧度制的计算，x = x + step*Math.cos(direction),y= y + step*Math.sin(direction)
+        ctxpath.beginPath();
+        ctxpath.moveTo(movepointx, movepointy);
+        ctxpath.lineWidth = 6;
+        ctxpath.lineTo(distinx, distiny);
+        ctxpath.stroke();
+        //ctxpath.fillRect(movepointx, movepointy, 50, 50);   //测试点的位置是否正确
+        ctxpath.restore();
+
+        movepointx = distinx;
+        movepointy = distiny;
+
+        //alert(boyx + " " + boyy);
+        //移动小人过程，同时需要进行图片旋转
+      /*  ctxboy.clearRect(0, 0, 400, 400);
+        ctxboy.save();
+        //alert("boyx:" + boyx + " boyy:" + boyy);
+        ctxboy.translate(boyx + 20, boyy + 20);   //移动到的位置是boyx,boyy
+        //ctxboy.rotate(direction);
+        ctxboy.drawImage(imgboy, -40 / 2, -40 / 2, 40, 40);
+        ctxboy.restore();*/
+        ctxboy.save();
+        ctxboy.clearRect(0, 0, 400, 400);
+        ctxboy.translate(boyx + 20, boyy + 20);
+        ctxboy.rotate(direction);
+        ctxboy.drawImage(imgboy, -40 / 2, -40 / 2, 40, 40);
+        ctxboy.restore();
+        count = count - 1;
+    }
+
+function runCode() {
+      // Generate JavaScript code and run it.
+      window.LoopTrap = 1000;
+      Blockly.JavaScript.INFINITE_LOOP_TRAP =
+        'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      try {
+        //code = code;
+        //alert(code);
+
+        let loopTimes = 1;
+        //对是for循环的处理，提取运行次数并处理之后的code,这里的bug是for循环必须在字符串的开头
+        if (code.substring(0, 3) === "for") {
+          var startIndex = code.indexOf("count < ") + 8;
+          loopTimes = parseInt(code.substring(code.indexOf("count < ") + 8, code.indexOf("; count++")), 10);
+          code = code.substring(code.indexOf("loop.\";") + 7, code.indexOf("}"));
+        }
+
+        //code = code + "isRightResult();";  //这里的code由于需要重复执行，需要修改isRightResult()的位置。
+        var funcs = code.split(";");
+        alert(funcs);
+        count = funcs.length - 1;   //得到循环中的块数
+
+        //alert(count + " " + loopTimes);
+        //var countnum = count;
+
+        //控制分步执行，这里必须用let定义i,具体看 https://blog.csdn.net/slyjit/article/details/79383668
+        for (let time = 1; time <= loopTimes + 1; time++) {
+          setTimeout(function () {
+            if (time === loopTimes + 1) {
+              //alert(time);
+              setTimeout(function () {
+                isRightResult();
+              }, (loopTimes + 1) * count * 100);    //这里的运行isRightResult()的时间间隔判断设置为总的执行函数个数*100
+            } else {
+              for (let i = 0; i < count; i++) {
+                setTimeout(function () {
+                  eval(funcs[i] + ";");    //运行循环中的块，用取余来控制循环
+                }, 100 * i);
+              }
+            }
+          }, 100 * time);
+
+        }
+
+        //turnDireAngle("right","45");
+      } catch (e) {
+        alert(e);
+      }
+    }
+    /*
+    function runCode() {
+    // Generate JavaScript code and run it.
+
+    window.LoopTrap = 1000;
+    Blockly.JavaScript.INFINITE_LOOP_TRAP =
+        'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+
+
+    try {
+        //code = code;
+        alert(code);
+        count = code.split(";").length - 1;
+        eval(code);
+        isRightResult();
+    } catch (e) {
+        alert(e);
+    }
+}*/
+
+
+
+    //此处往下是通过javascript解释器实现的步进功能
+    var outputArea = document.getElementById('output');
+    var stepButton = document.getElementById('stepButton');
+    var myInterpreter = null;
+
+    function initApi(interpreter, scope) {
+      // Add an API function for the alert() block, generated for "text_print" blocks.
+      interpreter.setProperty(scope, 'moveStep',
+          interpreter.createNativeFunction(function(text,number) {
+        text = text ? text.toString() : '';
+        
+        //alert(number);
+        moveStep(text,number);
+      }));
+
+      // Add an API function for the prompt() block.
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(prompt(text));
+      };
+
+      interpreter.setProperty(scope, 'turnDireAngle',
+          interpreter.createNativeFunction(function(text,angle) {
+        text = text ? text.toString() : '';
+        angle = angle?angle.toString():' ';
+        alert(angle);
+        turnDireAngle(text,angle);
+      }));
+
+      // Add an API function for highlighting blocks.
+      var wrapper = function(id) {
+        id = id ? id.toString() : '';
+        return interpreter.createPrimitive(highlightBlock(id));
+      };
+      interpreter.setProperty(scope, 'highlightBlock',
+          interpreter.createNativeFunction(wrapper));
+    }
+
+    var highlightPause = false;
+    var latestCode = '';
+
+    function highlightBlock(id) {
+      workspace.highlightBlock(id);
+      highlightPause = true;
+    }
+
+    function resetStepUi(clearOutput) {
+      workspace.highlightBlock(null);
+      highlightPause = false;
+
+      if (clearOutput) {
+        outputArea.value = 'Program output:\n=================';
+      }
+    }
+
+    function generateCodeAndLoadIntoInterpreter() {
+      // Generate JavaScript code and parse it.
+
+      Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+      Blockly.JavaScript.addReservedWords('highlightBlock');
+      latestCode = Blockly.JavaScript.workspaceToCode(workspace);
+      //alert(latestCode);
+      resetStepUi(true);
+    }
+
+    function stepCode() {
+      if (!myInterpreter) {
+        // First statement of this code.
+        // Clear the program output.
+        resetStepUi(true);
+        myInterpreter = new Interpreter(latestCode, initApi);
+
+        // And then show generated code in an alert.
+        // In a timeout to allow the outputArea.value to reset first.
+        setTimeout(function() {
+          alert('Ready to execute the following code\n' +
+            '===================================\n' + latestCode);
+          highlightPause = true;
+          stepCode();
+        }, 1);
+        return;
+      }
+      highlightPause = false;
+      do {
+        try {
+          var hasMoreCode = myInterpreter.step();
+        } finally {
+          if (!hasMoreCode) {
+            // Program complete, no more code to execute.
+            outputArea.value += '\n\n<< Program complete >>';
+       		
+
+            myInterpreter = null;
+            resetStepUi(false);
+
+            // Cool down, to discourage accidentally restarting the program.
+            stepButton.disabled = 'disabled';
+            setTimeout(function() {
+              stepButton.disabled = '';
+            }, 2000);
+
+            return;
+          }
+        }
+        // Keep executing until a highlight statement is reached,
+        // or the code completes or errors.
+      } while (hasMoreCode && !highlightPause);
+    }
+
+    // Load the interpreter now, and upon future changes.
+    generateCodeAndLoadIntoInterpreter();
+    workspace.addChangeListener(function(event) {
+      if (!(event instanceof Blockly.Events.Ui)) {
+        // Something changed. Parser needs to be reloaded.
+        generateCodeAndLoadIntoInterpreter();
+      }
+    });
+
+
+
+function restart() {
+    location.reload();
+}
+
+//run the code,control the direction and move
+var dire = 0;
+
+
+
+//判断是否是正确的结果
+function isRightResult() {
+    //isRightResult作为检查正确位置的激活
+    setInterval(function () {
+        if (!$('#be').is(":animated") && count === 0) {
+            var marginleft = beimg.offsetLeft - bemap.offsetLeft;
+            var margintop = beimg.offsetTop - bemap.offsetTop;
+            
+            if (marginleft === 150 && margintop === 305){
+                //run success
+            $('#success-confirm').modal({
+                relatedTarget: this,
+                onConfirm: function () {
+                    window.location.replace("Course9-6.html");
+                },
+                onCancel: function () {
+
+                }
+            });
+
+            } else {
+                //run failed
+                //alert(marginleft + "," + margintop);
+                $('#failed-confirm').modal({
+                    relatedTarget: this,
+                    onConfirm: function () {
+                        restart();
+                    },
+                    onCancel: function () {
+
+                    }
+                });
+            }
+            count = count - 1;
+        }
+    }, 100);
+}
+
+</script>
+<script>
+    $(document).ready(function () {
+        var rotate = function () {
+            $("#boy2").rotate({
+                angle: 0,
+                animateTo: 360,
+                duration: 5000,
+                callback: rotate,
+                easing: function (x, t, b, c, d) {
+                    return c * (t / d) + b;
+                },
+                bind: {
+                    click: function () {
+                        $(this).stopRotate();
+                    }
+                }
+            });
+        }
+        rotate();
+    });
+</script>
+
+
+
+
+<!-- 单步
+  
+<script type="text/javascript" src="myblock/acorn_interpreter.js"></script>
+<script type="text/javascript" src="myblock/wait_block.js"></script>
+<script type="text/javascript" src="myblock/step-execution.js"></script> -->
+</body>
+</html>

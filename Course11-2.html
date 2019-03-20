@@ -1,0 +1,313 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Course11-1</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <link rel="stylesheet" href="assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lte IE 8 ]>
+  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+  <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+  <![endif]-->
+  <script src="assets/js/amazeui.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/jQueryRotate.js"></script>
+
+  <!-- 引入 blockly -->
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/msg/js/zh-hans.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+  <script src="myblock/zrg_blocks.js"></script>
+
+</head>
+<body>
+<header class="am-topbar am-topbar-inverse">
+  <h1 class="am-topbar-brand">
+    <a href="HomePage.html" class="am-icon-home am-icon-lg">课程11：计数循环游戏</a>
+  </h1>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+          data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+          class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+    <div class="am-topbar-left"style="border:2px solid;border-radius: 5px;padding-top: 3px;margin-top:3px ;">
+    		<a href="Course11-1.html" type="button" class="am-btn am-btn-primary am-round am-active">1</a>
+    		<a href="Course11-2.html" type="button" class="am-btn am-btn-primary am-round">2</a>
+    		<a href="Course11-3.html" type="button" class="am-btn am-btn-primary am-round">3</a>
+    		<a href="Course11-4.html" type="button" class="am-btn am-btn-primary am-round">4</a>
+    		<a href="Course11-5.html" type="button" class="am-btn am-btn-primary am-round">5</a>
+    		<a href="Course11-6.html" type="button" class="am-btn am-btn-primary am-round">6</a>
+    		
+    	
+    		<button class="am-btn am-btn-primary">更多
+    			<i class="am-icon-chevron-circle-down"></i>
+    		</button>
+    </div>
+    <div class="am-topbar-right">
+      <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+        <button data-am-dropdown-toggle class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle">
+          <i class="am-icon-bars"></i>
+        </button>
+        <ul class="am-dropdown-content">
+          <li><a href="#">注册</a></li>
+          <li><a href="#">随便看看</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<!--在这里编写你的代码-->
+
+<div class="am-g doc-am-g">
+  <div class="am-u-sm-12 am-u-lg-4">
+    <div id="map" style="width:400px; height:400px;background:url(assets/img/course11-2_bg.jpg) no-repeat;background-size: 100% 100%;  ">
+      <div style="padding-left:120px;padding-top:170px">
+        <div id="centerpart" style="width:70px; height:70px; background:url(assets/img/course11-1_talk.png) no-repeat;background-size: 100% 100%; visibility:hidden;">
+          <div style="padding-left:20px;padding-top:12px"><h2 id = "talk"> </h2></div>
+          
+        </div>
+        
+      </div>
+    </div>
+    <div class="am-g" style="width:430px;">
+      <div class="am-u-sm-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-xl am-fl" onclick="runCode()">
+          <i class="am-icon-play"></i>
+          运行</button>
+      </div>
+      <div class="am-u-sm-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-xl am-fr " onclick="stepCode()">
+          <i class="am-icon-forward"></i>步进</button>
+      </div>
+    </div>
+
+  </div>
+  <div  id="blocklyArea" class="am-u-sm-12 am-u-lg-8 am-u-end" style="background-color:LightSteelBlue">
+    <div class="am-container">
+      <img id="icon1" src="assets/img/pig.jpg" class="am-circle am-fl">
+      <p class="am-center">帮小猫数从1到101的奇数，间隔为0.1秒</p>
+    </div>
+    <div class="am-g" style="background-color:SteelBlue">
+      <div class="am-u-sm-4 am-u-md-2 am-u-lg-2">
+        模块
+      </div>
+      <div class="am-u-sm-4 am-u-md-6 am-u-lg-4">
+        工作区域1/6模块
+      </div>
+      <div class="am-u-sm-4 am-u-md-4 am-u-lg-6">
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="restart()">
+          <i class="am-icon-refresh"></i>
+          重新开始
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-radius am-btn-sm am-fr" onclick="generateCode()">
+          <i class="am-icon-play-circle"></i>
+          显示代码
+        </button>
+      </div>
+    </div>
+    <!--  blockly工作区<!-->
+    <div id="blocklyDiv" style="height: 400px; "></div>
+  </div>
+</div>
+
+<xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">
+  <block type="start_block" id="A/3}biDE0:cC]4V!B}fl" x="200" y="63"></block>
+</xml>
+
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+  <category name="Category 1">
+    <block type="controls_for">
+      <field name="VAR" id="!=|`7NCZI?P)I@^#p++V" variabletype="">i</field>
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_get">
+      <field name="VAR" id="!=|`7NCZI?P)I@^#p++V" variabletype="">i</field>
+    </block>
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+    <block type="zrg_saysomething"></block>
+    <block type="text">
+      <field name="TEXT">小猫</field>
+    </block>
+  </category>
+  <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
+</xml>
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="success-confirm">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">Amaze UI</div>
+    <div class="am-modal-bd">
+      祝贺你，完成了关卡！
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>下一关</span>
+    </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="failed-confirm">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">Amaze UI</div>
+    <div class="am-modal-bd">
+      闯关失败，再试试吧！
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>重新开始</span>
+    </div>
+  </div>
+</div>
+<div id="output"></div>
+
+<script type="text/javascript" src="myblock/workspace.js"></script>
+
+
+<script>
+var map = document.getElementById('map');   //地图，用以计算相对位置
+var center = document.getElementById('centerpart');
+var count = 0;  //用以对块计数判断
+
+
+
+function runCode() {
+  $("#centerpart").css("visibility","visible");
+    // Generate JavaScript code and run it.
+    window.LoopTrap = 1000;
+    Blockly.JavaScript.INFINITE_LOOP_TRAP =
+        'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    try {
+        //code = code;
+        alert(code);
+        count = code.split(";").length - 1;
+        eval(code);
+        isRightResult();
+    } catch (e) {
+        alert(e);
+    }
+}
+
+function restart() {
+    location.reload();
+}
+
+//run the code,control the direction and move
+var times = 0;
+var result = 0;
+function saysomething(someone,something,time){
+  if(someone == "小猫"){
+    times = time*1000 + times;
+    setTimeout(function(){
+    var talkpic = document.getElementById("talk");
+    talkpic.innerHTML = something;
+    },times);
+    // sleep(1000*time);
+    // setTimeout("talkpic.innerHTML = something;",times);
+    result = something;
+  }
+
+}
+
+
+//设置休眠函数
+function sleep(delay) {
+  var start = (new Date()).getTime();
+  while ((new Date()).getTime() - start < delay) {
+    continue;
+  }
+}
+
+//判断是否是正确的结果
+function isRightResult() {
+    //isRightResult作为检查正确的激活
+    var interval = setInterval(function () {
+        if (times == 5100 && result == 101) {
+            //run success
+            $('#success-confirm').modal({
+                relatedTarget: this,
+                onConfirm: function () {
+                    window.location.replace("Course11-3.html");
+                },
+                onCancel: function () {
+                  clearInterval(interval);
+                }
+            });
+        } else {
+            //run failed
+            //alert(marginleft + "," + margintop);
+            $('#failed-confirm').modal({
+                relatedTarget: this,
+                onConfirm: function () {
+                    restart();
+                },
+                onCancel: function () {
+                  clearInterval(interval);
+                }
+            });
+        }
+        count = count - 1;
+        
+    }, 7000);
+}
+
+</script>
+
+
+
+</body>
+</html>
